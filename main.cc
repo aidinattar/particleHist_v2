@@ -8,36 +8,17 @@
 #include "AnalysisSteering.h"
 #include "ParticleMass.h"
 #include "EventDump.h"
+#include "AnalysisInfo.h"
+#include "SourceFactory.h"
 
 using namespace std;
 
-int main( int argc, char* argv[] ) {
+int main( int argc, char* argv[] ) { 
+  // store command line parameters
+  AnalysisInfo* info = new AnalysisInfo( argc, argv );
 
   // create data source
-  EventSource* es;
-  const string type = argv[1];
-  if ( type == "input" ) {
-    const string name = argv[2];
-    es = new EventReadFromFile( name );
-  }
-  else
-  if ( type == "sim" ) {
-    const string nevt = argv[2];
-    const string seed = ( argc > 3 ? argv[3] : "1" );
-    stringstream sstr;
-    unsigned int n;
-    sstr.str( nevt );
-    sstr >> n;
-    sstr.clear();
-    unsigned int s;
-    sstr.str( seed );
-    sstr >> s;
-    es = new EventSim( n, s );
-  }
-  else {
-    cout << "invalid keyword" << endl;
-    return 0;
-  }
+  EventSource* es = SourceFactory::create( info );
 
   // create a list of analyzers
   vector<AnalysisSteering*> aList;
