@@ -1,0 +1,46 @@
+
+---- Modificare Hist_v1 e usare un factory per creare data source ----
+
+Usare "SourceFactory" per creare l'"EventSource".
+Il comando di esecuzione dovrebbe essere:
+
+execName input fileName
+or
+execName sim numberOfEvents [seed seedNumber]
+
+***
+Prendere i file seguenti  dall'esempio "braggPlot_v2":
+AnalysisInfo.h
+AnalysisInfo.cc
+SourceFactory.h
+SourceFactory.cc
+Tutti questi file possono essere usati senza modifiche.
+
+***
+Modificare "main.cc" prendendo "braggPlot_v2" come referenza:
+- creare un oggetto "AnalysisInfo" e usarlo per contenere i parametri
+  della linea di comando 
+- rimuovere il codice per creare l'"EventSource" e usare una 
+  SourceFactory" al suo posto
+- rimuovere gli header files non necessari
+
+********* lista finale delle funzioni *********
+
+main                   modify Hist_v1
+mass                   copy   Hist_v1
+
+********* lista finale delle classi   *********
+
+                       .h                            .cc
+AnalysisInfo           copy   braggPlot_v2           copy   braggPlot_v2
+SourceFactory          copy   braggPlot_v2           copy   braggPlot_v2
+Event                  copy   Hist_v1                copy   Hist_v1
+EventSource            copy   Hist_v1                copy   Hist_v1
+EventReadFromFile      copy   Hist_v1                copy   Hist_v1
+EventSim               copy   Hist_v1                copy   Hist_v1
+AnalysisSteering       copy   Hist_v1                copy   Hist_v1
+EventDump              copy   Hist_v1                copy   Hist_v1
+ParticleMass           copy   Hist_v1                copy   Hist_v1
+MassMean               copy   Hist_v1                copy   Hist_v1
+Constants              copy   Hist_v1                copy   Hist_v1
+Utilities              copy   Hist_v1                copy   Hist_v1
